@@ -4,6 +4,7 @@ import com.example.programacao_funcional.comparator.model.dto.ProductRequest;
 import com.example.programacao_funcional.comparator.model.dto.ProductResponse;
 import com.example.programacao_funcional.comparator.sevice.ProductService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +19,13 @@ public class ProductController {
         this.service = service;
     }
 
-    @GetMapping
-    public ProductResponse findById(Long id){
-        return service.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id){
+        try{
+            return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
+        }catch (RuntimeException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
@@ -38,6 +43,13 @@ public class ProductController {
     @GetMapping("/allSorted")
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> findAllSorted(){
-        return service.sort();
+        return service.sortByName();
     }
+
+    @GetMapping("/allSorted/price")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> findAllSortedByPrice(){
+        return service.sortByPrice();
+    }
+
 }

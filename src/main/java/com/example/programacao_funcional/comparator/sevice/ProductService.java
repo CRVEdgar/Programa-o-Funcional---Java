@@ -7,10 +7,7 @@ import com.example.programacao_funcional.comparator.repository.ProductRepository
 import com.example.programacao_funcional.comparator.util.MyComparator;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -30,14 +27,36 @@ public class ProductService {
         );
     }
 
-    public List<ProductResponse> sort(){
+    public List<ProductResponse> sortByName(){
 
         List<Product> productList = repository.findAll();
 
         /** utilizando a inteface Comparator para comparar objetos e ordena-los*/
-        productList.sort(new MyComparator());
 
-        //TODO - analisar se ordena , senao: criar ordenação para DTO
+        /** FOMR 1 - classe implementada */
+        // productList.sort(new MyComparator());
+
+        /** FORM 2 - intanciação do Comparator */
+        //Comparator<Product> comparator = getComparator();
+        //productList.sort(comparator);
+
+        /** FORM 3 - intanciação do Comparator utilizando EXPRESSAO LAMBDA */
+        //Comparator<Product> comparator = getArrowFunction();
+        //productList.sort(comparator);
+
+        /** FORM 4 - funcao anônima hardcode*/
+        productList.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
+
+        return convertList( productList );
+
+    }
+
+    public List<ProductResponse> sortByPrice(){
+
+        List<Product> productList = repository.findAll();
+
+        /** funcao anônima */
+        productList.sort((p1, p2) -> p1.getPrice().compareTo(p2.getPrice()));
 
         return convertList( productList );
 
@@ -73,4 +92,24 @@ public class ProductService {
 
         return productResponseSet;
     }
+
+    private Comparator<Product> getComparator() {
+        return new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+            }
+        };
+    }
+
+    private Comparator<Product> getArrowFunction() {
+        /** modo 1*/
+//        return (p1, p2) -> {
+//            return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+//        };
+
+        /** modo 2*/
+        return (p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+    }
+
 }

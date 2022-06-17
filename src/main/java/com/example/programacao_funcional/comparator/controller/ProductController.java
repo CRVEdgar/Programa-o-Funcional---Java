@@ -52,4 +52,10 @@ public class ProductController {
         return service.sortByPrice();
     }
 
+    @GetMapping("/allSorted/price/callback")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> findAllSortedByPriceCallBackMehod(){
+        return service.sortByPriceArgument();
+    }
+
 }

@@ -62,6 +62,16 @@ public class ProductService {
 
     }
 
+    public List<ProductResponse> sortByPriceArgument() {
+
+        List<Product> productList = repository.findAll();
+
+        /** Funcao como argumento de outra funcao*/
+        productList.sort( ProductService::comparePrices );
+
+        return convertList( productList );
+    }
+
 
     public ProductResponse findById(Long id) throws RuntimeException {
         return ProductResponse.fromModel(
@@ -110,6 +120,10 @@ public class ProductService {
 
         /** modo 2*/
         return (p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+    }
+
+    private static int comparePrices(Product p1, Product p2){
+        return p1.getPrice().compareTo(p2.getPrice());
     }
 
 }

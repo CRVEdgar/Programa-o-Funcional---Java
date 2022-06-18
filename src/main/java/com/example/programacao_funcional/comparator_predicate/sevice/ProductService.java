@@ -4,12 +4,13 @@ import com.example.programacao_funcional.comparator_predicate.model.Product;
 import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
 import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
 import com.example.programacao_funcional.comparator_predicate.repository.ProductRepository;
-import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.MyComparator;
-import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.PriceUpdate;
+import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.comparator.MyComparator;
+import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.function.UpperCaseName;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -29,7 +30,7 @@ public class ProductService {
         );
     }
 
-    /**todo COMPARETOR  */
+    /**todo COMPARATOR  */
     public List<ProductResponse> sortByName(){
 
         List<Product> productList = repository.findAll();
@@ -138,6 +139,40 @@ public class ProductService {
 
         productList.forEach(System.out::println);
         return convertList(productList);
+    }
+
+    /**todo FUNCTION */
+    public List<String> updateName ( ) {
+        List<Product> productList = repository.findAll();
+
+        /** FOMR 1 - implementação da Interface Function */
+//        List<String> names =
+//                productList  /**todo: converter a lista para stream // usar a funçao map // applicar a funcao */
+//                        .stream()
+//                        .map(new UpperCaseName())
+//                .collect(Collectors.toList()); /** convert a stream novamente para lista */
+
+        /** FORM 2 - Expressao lambda declarada */
+//        Function<Product, String> productStringFunction =  p -> {
+//            return p.getName().toUpperCase();
+//        };
+//
+//        List<String> names =
+//                productList
+//                        .stream()
+//                        .map( productStringFunction )
+//                .collect(Collectors.toList());
+
+        /** FOMR 3 - Expressão lambda inline */
+        List<String> names =
+                productList
+                        .stream()
+                        .map( p -> p.getName().toUpperCase())
+                        .collect(Collectors.toList());
+
+
+        names.forEach(System.out::println);
+        return names;
     }
 
     /** METODOS AUXILIARES */

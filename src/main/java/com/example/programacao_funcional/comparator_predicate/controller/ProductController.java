@@ -70,4 +70,10 @@ public class ProductController {
         return service.updatePrice(percent);
     }
 
+    @PutMapping("/updateName")
+    @ResponseStatus(HttpStatus.OK)
+    public List<String> updateName(){
+        return service.updateName();
+    }
+
 }

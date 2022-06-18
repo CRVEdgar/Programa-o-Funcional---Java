@@ -1,4 +1,4 @@
-package com.example.programacao_funcional.comparator_predicate.util_implemented_classes;
+package com.example.programacao_funcional.comparator_predicate.utils_interface_functional;
 
 import com.example.programacao_funcional.comparator_predicate.model.Product;
 

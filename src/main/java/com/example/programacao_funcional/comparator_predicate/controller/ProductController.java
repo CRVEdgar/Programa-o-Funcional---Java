@@ -64,4 +64,10 @@ public class ProductController {
        return service.removeIf( Double.valueOf(price));
     }
 
+    @PutMapping("/updatePrice/{percent}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> updatePrice(@PathVariable Double percent){
+        return service.updatePrice(percent);
+    }
+
 }

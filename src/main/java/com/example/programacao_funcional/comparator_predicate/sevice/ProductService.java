@@ -4,10 +4,12 @@ import com.example.programacao_funcional.comparator_predicate.model.Product;
 import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
 import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
 import com.example.programacao_funcional.comparator_predicate.repository.ProductRepository;
-import com.example.programacao_funcional.comparator_predicate.util_implemented_classes.MyComparator;
+import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.MyComparator;
+import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.PriceUpdate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 @Service
 public class ProductService {
@@ -27,6 +29,7 @@ public class ProductService {
         );
     }
 
+    /**todo COMPARETOR  */
     public List<ProductResponse> sortByName(){
 
         List<Product> productList = repository.findAll();
@@ -89,7 +92,7 @@ public class ProductService {
 
     }
 
-    /** PREDICATE */
+    /**todo PREDICATE */
     public List<ProductResponse> removeIf(Double price){
         List<Product> productList = repository.findAll();
 
@@ -118,6 +121,24 @@ public class ProductService {
         );
     }
 
+    /**todo CONSUMER */
+    public List<ProductResponse> updatePrice (Double percent){
+        List<Product> productList = repository.findAll();
+
+        /** FOMR 1 - implementação da Interface Consumer */
+//        PriceUpdate.PERCENTE = percent;
+//        productList.forEach(new PriceUpdate());
+
+        /** FORM 2 - Expressao lambda declarada */
+//        Consumer<Product> productConsumer = p -> p.setPrice( p.getPrice() * percent );
+//        productList.forEach(productConsumer);
+
+        /** FOMR 3 - Expressão lambda inline */
+        productList.forEach ( p -> p.setPrice( p.getPrice() * percent ) );
+
+        productList.forEach(System.out::println);
+        return convertList(productList);
+    }
 
     /** METODOS AUXILIARES */
     private List<ProductResponse> convertList(List<Product> product){

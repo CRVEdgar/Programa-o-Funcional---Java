@@ -1,10 +1,10 @@
-package com.example.programacao_funcional.comparator.sevice;
+package com.example.programacao_funcional.comparator_predicate.sevice;
 
-import com.example.programacao_funcional.comparator.model.Product;
-import com.example.programacao_funcional.comparator.model.dto.ProductRequest;
-import com.example.programacao_funcional.comparator.model.dto.ProductResponse;
-import com.example.programacao_funcional.comparator.repository.ProductRepository;
-import com.example.programacao_funcional.comparator.util.MyComparator;
+import com.example.programacao_funcional.comparator_predicate.model.Product;
+import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
+import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
+import com.example.programacao_funcional.comparator_predicate.repository.ProductRepository;
+import com.example.programacao_funcional.comparator_predicate.util_implemented_classes.MyComparator;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -87,6 +87,35 @@ public class ProductService {
                 repository.findAll()
         );
 
+    }
+
+    /** PREDICATE */
+    public List<ProductResponse> removeIf(Double price){
+        List<Product> productList = repository.findAll();
+
+        /** FORM 1 - Expressao lambda declarada */
+//        Predicate<Product> predicate = p -> p.getPrice() <= price;
+//        productList.removeIf(predicate);
+
+        /** FOMR 2 - Expressão lambda inline */
+        productList.removeIf( p -> p.getPrice() <= price);
+
+        /** FOMR 3 - implementação da Interface Predicate */
+//        ProductPredicate.PRICE = price;
+//        productList.removeIf(new ProductPredicate());
+
+        /** FORM 4 - Reference Method com método estático */
+//        Product.PRICE = price;
+//        productList.removeIf( Product::staticProductPredicate );
+
+        /** FORM 5 - Reference Method com método não estático */
+//        Product.PRICE = price;
+//        productList.removeIf( Product::nonStaticProductPredicate );
+
+
+        return convertList(
+                productList
+        );
     }
 
 

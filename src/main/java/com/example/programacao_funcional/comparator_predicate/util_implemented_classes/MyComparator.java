@@ -1,7 +1,6 @@
-package com.example.programacao_funcional.comparator.util;
+package com.example.programacao_funcional.comparator_predicate.util_implemented_classes;
 
-import com.example.programacao_funcional.comparator.model.Product;
-import org.springframework.context.annotation.Bean;
+import com.example.programacao_funcional.comparator_predicate.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;

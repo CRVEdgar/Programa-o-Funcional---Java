@@ -1,6 +1,6 @@
-package com.example.programacao_funcional.comparator.model.dto;
+package com.example.programacao_funcional.comparator_predicate.model.dto;
 
-import com.example.programacao_funcional.comparator.model.Product;
+import com.example.programacao_funcional.comparator_predicate.model.Product;
 
 public class ProductResponse {
 

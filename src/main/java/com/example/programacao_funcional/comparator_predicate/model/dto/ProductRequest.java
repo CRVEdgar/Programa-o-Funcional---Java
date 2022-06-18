@@ -1,7 +1,7 @@
-package com.example.programacao_funcional.comparator.model.dto;
+package com.example.programacao_funcional.comparator_predicate.model.dto;
 
 
-import com.example.programacao_funcional.comparator.model.Product;
+import com.example.programacao_funcional.comparator_predicate.model.Product;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,13 +11,13 @@ public class ProductRequest {
     @NotBlank
     private String name;
     @NotNull
-    private double price;
+    private Double price;
 
     public String getName() {
         return name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

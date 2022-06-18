@@ -1,8 +1,8 @@
-package com.example.programacao_funcional.comparator.controller;
+package com.example.programacao_funcional.comparator_predicate.controller;
 
-import com.example.programacao_funcional.comparator.model.dto.ProductRequest;
-import com.example.programacao_funcional.comparator.model.dto.ProductResponse;
-import com.example.programacao_funcional.comparator.sevice.ProductService;
+import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
+import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
+import com.example.programacao_funcional.comparator_predicate.sevice.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +56,12 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> findAllSortedByPriceCallBackMehod(){
         return service.sortByPriceArgument();
+    }
+
+    @DeleteMapping("/removeAllBy/{price}")
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    public List<ProductResponse> removeIf(@PathVariable Double price){
+       return service.removeIf( Double.valueOf(price));
     }
 
 }

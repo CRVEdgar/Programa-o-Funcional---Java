@@ -1,6 +1,6 @@
-package com.example.programacao_funcional.comparator.repository;
+package com.example.programacao_funcional.comparator_predicate.repository;
 
-import com.example.programacao_funcional.comparator.model.Product;
+import com.example.programacao_funcional.comparator_predicate.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

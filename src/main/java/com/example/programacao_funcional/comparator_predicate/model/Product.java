@@ -1,4 +1,4 @@
-package com.example.programacao_funcional.comparator.model;
+package com.example.programacao_funcional.comparator_predicate.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +14,8 @@ public class Product {
 
     private String name;
     private Double price;
+
+    public static Double PRICE = 0.0;
 
     public Product() {
     }
@@ -58,4 +60,19 @@ public class Product {
      *     return name.toUpperCase().comparableTo(p.getName().toUpperCase());
      * }
      * */
+
+    /***
+     * TODO: Predicate com Metodo estatico
+     */
+    public static boolean staticProductPredicate(Product p){
+        return p.getPrice() <= PRICE;
+    }
+
+    /***
+     * TODO: Predicate com Metodo estatico
+     */
+    public boolean nonStaticProductPredicate(){
+        return price <= PRICE;
+    }
+
 }

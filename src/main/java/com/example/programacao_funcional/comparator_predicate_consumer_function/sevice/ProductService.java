@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.example.programacao_funcional.comparator_predicate_consumer_function.utils_interface_functional.function.CriteriaFunction.filteredSum;
 
@@ -176,9 +177,32 @@ public class ProductService {
     }
 
     public double sumPrice(Character initial){
+        /** função que recebe uma função como parametro */
+
         List<Product> products = repository.findAll();
         double sum = filteredSum(products, p-> p.getName().charAt(0) == initial );
         return sum;
+    }
+
+    /** STREAM */
+    public void streamFunction(){
+        List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
+
+        Stream<Integer> st1 = list.stream().map(n -> n++ );
+        System.out.println(Arrays.toString(st1.toArray()));
+
+        Stream<String> st2 = Stream.of("Maria", "Alex", "Bob").sorted( Comparator.comparing( s-> {
+            return s.
+        }) );
+        System.out.println(Arrays.toString(st2.toArray()));
+
+        Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
+        System.out.println(Arrays.toString(st3.limit(10).toArray()));
+        Stream<Integer> st3A = Stream.iterate(10, x -> x + 2);
+        System.out.println(Arrays.toString(st3.limit(10).toArray()));
+
+        Stream<Long> st4 = Stream.iterate(new long[]{ 0L, 1L }, p->new long[]{ p[1], p[0]+p[1] }).map(p -> p[0]);
+        System.out.println(Arrays.toString(st4.limit(10).toArray()));
     }
 
     /** METODOS AUXILIARES */

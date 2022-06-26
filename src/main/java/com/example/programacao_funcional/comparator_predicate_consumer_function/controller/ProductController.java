@@ -82,4 +82,10 @@ public class ProductController {
         return service.sumPrice(letra);
     }
 
+    @GetMapping("/stream/consoleLog")
+    @ResponseStatus(HttpStatus.OK)
+    public void stream(){
+        service.streamFunction();
+    }
+
 }

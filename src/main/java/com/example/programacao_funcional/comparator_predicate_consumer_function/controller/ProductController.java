@@ -1,8 +1,8 @@
-package com.example.programacao_funcional.comparator_predicate.controller;
+package com.example.programacao_funcional.comparator_predicate_consumer_function.controller;
 
-import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
-import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
-import com.example.programacao_funcional.comparator_predicate.sevice.ProductService;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.dto.ProductRequest;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.dto.ProductResponse;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.sevice.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,6 +74,12 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public List<String> updateName(){
         return service.updateName();
+    }
+
+    @GetMapping("/sumPrice/{letra}")
+    @ResponseStatus(HttpStatus.OK)
+    public double sumByCharAt(@PathVariable Character letra){
+        return service.sumPrice(letra);
     }
 
 }

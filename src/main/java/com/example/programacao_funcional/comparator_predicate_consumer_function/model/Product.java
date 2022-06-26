@@ -1,4 +1,4 @@
-package com.example.programacao_funcional.comparator_predicate.model;
+package com.example.programacao_funcional.comparator_predicate_consumer_function.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

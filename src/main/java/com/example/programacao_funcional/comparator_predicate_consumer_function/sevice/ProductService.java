@@ -1,16 +1,16 @@
-package com.example.programacao_funcional.comparator_predicate.sevice;
+package com.example.programacao_funcional.comparator_predicate_consumer_function.sevice;
 
-import com.example.programacao_funcional.comparator_predicate.model.Product;
-import com.example.programacao_funcional.comparator_predicate.model.dto.ProductRequest;
-import com.example.programacao_funcional.comparator_predicate.model.dto.ProductResponse;
-import com.example.programacao_funcional.comparator_predicate.repository.ProductRepository;
-import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.comparator.MyComparator;
-import com.example.programacao_funcional.comparator_predicate.utils_interface_functional.function.UpperCaseName;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.Product;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.dto.ProductRequest;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.dto.ProductResponse;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.repository.ProductRepository;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.utils_interface_functional.comparator.MyComparator;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.example.programacao_funcional.comparator_predicate_consumer_function.utils_interface_functional.function.CriteriaFunction.filteredSum;
 
 @Service
 public class ProductService {
@@ -173,6 +173,12 @@ public class ProductService {
 
         names.forEach(System.out::println);
         return names;
+    }
+
+    public double sumPrice(Character initial){
+        List<Product> products = repository.findAll();
+        double sum = filteredSum(products, p-> p.getName().charAt(0) == initial );
+        return sum;
     }
 
     /** METODOS AUXILIARES */

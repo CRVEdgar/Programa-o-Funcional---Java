@@ -1,7 +1,7 @@
-package com.example.programacao_funcional.comparator_predicate.model.dto;
+package com.example.programacao_funcional.comparator_predicate_consumer_function.model.dto;
 
 
-import com.example.programacao_funcional.comparator_predicate.model.Product;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.Product;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

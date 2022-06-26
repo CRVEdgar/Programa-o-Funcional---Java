@@ -1,6 +1,6 @@
-package com.example.programacao_funcional.comparator_predicate.utils_interface_functional.predicate;
+package com.example.programacao_funcional.comparator_predicate_consumer_function.utils_interface_functional.predicate;
 
-import com.example.programacao_funcional.comparator_predicate.model.Product;
+import com.example.programacao_funcional.comparator_predicate_consumer_function.model.Product;
 
 import java.util.function.Predicate;
 

@@ -88,4 +88,9 @@ public class ProductController {
         service.streamFunction();
     }
 
+    @GetMapping("/priceAll")
+    @ResponseStatus(HttpStatus.OK)
+    public Double sumAllPrices(){
+        return service.reduce();
+    }
 }

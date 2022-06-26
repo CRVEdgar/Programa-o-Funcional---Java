@@ -191,18 +191,43 @@ public class ProductService {
         Stream<Integer> st1 = list.stream().map(n -> n++ );
         System.out.println(Arrays.toString(st1.toArray()));
 
-        Stream<String> st2 = Stream.of("Maria", "Alex", "Bob").sorted( Comparator.comparing( s-> {
-            return s.
-        }) );
+        Stream<String> st2 = Stream.of("Maria", "Alex", "Bob").sorted();
         System.out.println(Arrays.toString(st2.toArray()));
 
         Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
         System.out.println(Arrays.toString(st3.limit(10).toArray()));
         Stream<Integer> st3A = Stream.iterate(10, x -> x + 2);
-        System.out.println(Arrays.toString(st3.limit(10).toArray()));
+        System.out.println(Arrays.toString(st3A.limit(20).toArray()));
 
         Stream<Long> st4 = Stream.iterate(new long[]{ 0L, 1L }, p->new long[]{ p[1], p[0]+p[1] }).map(p -> p[0]);
         System.out.println(Arrays.toString(st4.limit(10).toArray()));
+    }
+
+    public Double reduce(){
+        /** PIPELINE */
+
+        List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
+        Stream<Integer> st1 = list.stream().map(x -> x * 10);
+        System.out.println(Arrays.toString(st1.toArray()));
+        int sum = list.stream().reduce(0, (x, y) -> x + y);
+        System.out.println("Sum = " + sum);
+
+        List<Integer> newList = list.stream()
+                .filter(x -> x % 2 == 0)
+                .map(x -> x * 10)
+                .collect(Collectors.toList());
+        System.out.println(Arrays.toString(newList.toArray()));
+
+        /** REST */
+        List<Product> productList = repository.findAll();
+
+        List<Double> prices = productList.stream().map(
+                product -> product.getPrice()
+        ).collect(Collectors.toList());
+
+        Double priceAll = prices.stream()
+                .reduce(0.0, (a,b) -> a+b);
+        return priceAll;
     }
 
     /** METODOS AUXILIARES */

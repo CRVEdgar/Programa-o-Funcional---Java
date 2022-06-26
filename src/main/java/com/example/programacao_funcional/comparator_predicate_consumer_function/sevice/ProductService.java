@@ -221,13 +221,34 @@ public class ProductService {
         /** REST */
         List<Product> productList = repository.findAll();
 
-        List<Double> prices = productList.stream().map(
-                product -> product.getPrice()
-        ).collect(Collectors.toList());
+//        List<Double> prices = productList.stream().map(
+//                product -> product.getPrice()
+//        ).collect(Collectors.toList());
+//
+//        Double priceAll = prices.stream()
+//                .reduce(0.0, (a,b) -> a+b);
 
-        Double priceAll = prices.stream()
+        Double priceAll = productList.stream()
+                .map(p -> p.getPrice())
                 .reduce(0.0, (a,b) -> a+b);
         return priceAll;
+    }
+
+    public /*List<ProductResponse>*/ List<Double> orderByPrice(Double val){
+        List<Product> productList = repository.findAll();
+
+        Comparator<Double> comparator = (s1,s2) -> s1.compareTo(s2);
+
+        List<Double> values = productList
+                .stream()
+                .filter( p -> p.getPrice() > val)
+                .map(p -> p.getPrice())
+                //.sorted( (s1,s2) -> s1.compareTo(s2) ) /**todo ordem crecence */
+                .sorted( comparator.reversed() ) /** ordem decrescente */
+                .collect(Collectors.toList());
+
+        return values;
+        //return convertList(productList);
     }
 
     /** METODOS AUXILIARES */
